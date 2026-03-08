@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Inter Bold";
+  src: url("./assets/fonts/inter/static/Inter_18pt-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter SemiBold";
+  src: url("./assets/fonts/inter/static/Inter_18pt-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter Medium";
+  src: url("./assets/fonts/inter/static/Inter_18pt-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Inter Regular";
+  src: url("./assets/fonts/inter/static/Inter_18pt-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Noto Bold";
+  src: url("./assets/fonts/noto-serif/static/NotoSerif-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Noto SemiBold";
+  src: url("./assets/fonts/noto-serif/static/NotoSerif-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Noto Medium";
+  src: url("./assets/fonts/noto-serif/static/NotoSerif-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Noto Regular";
+  src: url("./assets/fonts/noto-serif/static/NotoSerif-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Source Code Pro Bold";
+  src: url("./assets/fonts/source-code-pro/static/SourceCodePro-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Source Code Pro SemiBold";
+  src: url("./assets/fonts/source-code-pro/static/SourceCodePro-SemiBold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Source Code Pro Medium";
+  src: url("./assets/fonts/source-code-pro/static/SourceCodePro-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Source Code Pro Regular";
+  src: url("./assets/fonts/source-code-pro/static/SourceCodePro-Regular.ttf") format("truetype");
+}
+
+
+
+@theme {
+  --color-neutral-950: #0E121B;
+  --color-neutral-900: #191B25;
+  --color-neutral-800: #232530;
+  --color-neutral-700: #2B303B;
+  --color-neutral-600: #525866;
+  --color-neutral-500: #717784;
+  --color-neutral-400: #99A0AE;
+  --color-neutral-300: #CACFD8;
+  --color-neutral-200: #E0E4EA;
+  --color-neutral-100: #F3F5F8;
+  --color-neutral-50: #F5F7FA;
+  --color-neutral-0: #FFFFFF;
+  --color-neutral-blue-700: #2547D0;
+  --color-neutral-blue-500: #335CFF;
+  --color-neutral-blue-50: #EBF1FF;
+  --color-neutral-green-500: #21C16B;
+  --color-neutral-green-100: #D1FBE9;
+  --color-neutral-red-500: #FB3748;
+  --color-neutral-red-100: #FFD5D8;
+
+
+  --font-inter-bold: "Inter Bold";
+  --font-inter-semibold: "Inter SemiBold";
+  --font-inter-medium: "Inter Medium";
+  --font-inter-regular: "Inter Regular";
+
+
+
+}
+
+
+@layer base {
+  :root {
+    background-color: var(--color-neutral-0);
+  }
+
+  body{
+    @apply max-h-screen flex flex-col
+  }
+}
+
+@layer components {
+
+  .sans-serif-text-preset-1 {
+    font-family: var(--font-inter-bold), sans-serif;
+    font-size: 24px;
+    line-height: 120%;
+    letter-spacing: -0.5px;
+  }
+
+  .sans-serif-text-preset-2 {
+    font-family: var(--font-inter-bold), sans-serif;
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: -0.5px;
+  }
+
+  .sans-serif-text-preset-3 {
+    font-family: var(--font-inter-semibold), sans-serif;
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: -0.3px;
+  }
+
+  .sans-serif-text-preset-4 {
+    font-family: var(--font-inter-medium), sans-serif;
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing:-0.2px;
+  }
+
+  .sans-serif-text-preset-5 {
+    font-family: var(--font-inter-regular), sans-serif;
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing:-0.2px;
+  }
+
+  .sans-serif-text-preset-6 {
+    font-family: var(--font-inter-regular), sans-serif;
+    font-size: 12px;
+    line-height: 120%;
+    letter-spacing:-0.2px;
+  }
+}
