@@ -5,6 +5,7 @@ import { RefreshLeftIcon } from "./icons/RefreshLeftIcon";
 import { Logo } from "./Logo";
 import { ArchiveModal } from "./modals/ArchiveModal";
 import { DeleteModal } from "./modals/DeleteModal";
+import { Toast } from "./Toast";
 
 export function Components(){
     return(
@@ -15,6 +16,8 @@ export function Components(){
             <BorderButton titleButton="Border Button" Icon={RefreshLeftIcon} isDisabled={false}/>
             <DeleteModal/>
             <ArchiveModal/>
+            <Toast titleToast="Note saved successfully!"/>
+            <Toast titleToast="Note archived" link="Archived Notes"/>
         </div>
     )
 }
