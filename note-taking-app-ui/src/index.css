@@ -89,7 +89,31 @@
   --font-inter-medium: "Inter Medium";
   --font-inter-regular: "Inter Regular";
 
+  --spacing-0: 0;
+  --spacing-025: 2px;
+  --spacing-050: 4px;
+  --spacing-075: 6px;
+  --spacing-100: 8px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-250: 20px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-800: 64px;
+  --spacing-1000: 80px;
 
+  --radius-0: 0;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-full: 999px;
 
 }
 
@@ -99,7 +123,7 @@
     background-color: var(--color-neutral-0);
   }
 
-  body{
+  body {
     @apply max-h-screen flex flex-col
   }
 }
@@ -131,20 +155,20 @@
     font-family: var(--font-inter-medium), sans-serif;
     font-size: 14px;
     line-height: 120%;
-    letter-spacing:-0.2px;
+    letter-spacing: -0.2px;
   }
 
   .sans-serif-text-preset-5 {
     font-family: var(--font-inter-regular), sans-serif;
     font-size: 14px;
     line-height: 120%;
-    letter-spacing:-0.2px;
+    letter-spacing: -0.2px;
   }
 
   .sans-serif-text-preset-6 {
     font-family: var(--font-inter-regular), sans-serif;
     font-size: 12px;
     line-height: 120%;
-    letter-spacing:-0.2px;
+    letter-spacing: -0.2px;
   }
 }

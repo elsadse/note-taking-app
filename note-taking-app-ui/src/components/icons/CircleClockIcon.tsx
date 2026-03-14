@@ -1,4 +1,4 @@
-export function TimeIcon({ className }: { className?: string }) {
+export function CircleClockIcon({ className }: { className?: string }) {
     return (
         <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className={`stroke-neutral-700 ${className}`}>
             <path strokeLinecap="round" strokeLinejoin="round"
