@@ -7,8 +7,11 @@ import { ShowIcon } from "./icons/ShowIcon";
 import { InputField } from "./input/InputField";
 import { InputTypeGroup } from "./input/InputTypeGroup";
 import { Logo } from "./Logo";
+import { MenuBar } from "./MenuBar";
 import { ArchiveModal } from "./modals/ArchiveModal";
 import { DeleteModal } from "./modals/DeleteModal";
+import { PageHeader } from "./pageHeader/PageHeader";
+import { PageHeaderControl } from "./pageHeader/PageHeaderControl";
 import { Toast } from "./Toast";
 
 export function Components() {
@@ -25,6 +28,9 @@ export function Components() {
             <InputField name="search" placeholder="Search" type="text" icons={{IconBeforeInput:SearchIcon, css:"stroke"}} />
             <InputTypeGroup name="email" placeholder="exemple@email.com" titleLabel="Email" type="email" />
             <InputTypeGroup name="password" placeholder="Password" titleLabel="Password" type="password" textError="This is a hint text to help user." icon={{ Icon: ShowIcon, css: "fill" }} />
+            <PageHeader/>
+            <PageHeaderControl/>
+            <MenuBar/>
         </div>
     )
 }
