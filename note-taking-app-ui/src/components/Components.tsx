@@ -23,7 +23,7 @@ export function Components() {
         <div className="flex flex-col gap-y-5 py-5">
             <Logo />
             <PrimaryButton titleButton="Primary Button" isDisabled={false} />
-            <SecondaryButton titleButton="Secondary Button" isDisabled={true} />
+            <SecondaryButton titleButton="Secondary Button" isDisabled={false} />
             <BorderButton titleButton="Border Button" icon={{Icon:RefreshLeftIcon, css:"fill"}} isDisabled={false} />
             <DeleteModal />
             <ArchiveModal />
