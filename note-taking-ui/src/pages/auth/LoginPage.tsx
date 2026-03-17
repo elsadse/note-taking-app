@@ -21,7 +21,7 @@ export function LoginPage(){
             </div>
             <form className="flex flex-col justify-center gap-y-4 pt-6">
                 <InputTypeGroup name="email" placeholder="email@example.com" titleLabel="Email Address" type="email" />
-                <InputTypeGroup name="password" placeholder="" titleLabel="Password" type="password" icon={{ Icon: ShowIcon, css: "fill" }} link={{text:"Forgot", url:"#"}}/>
+                <InputTypeGroup name="password" placeholder="" titleLabel="Password" type="password" icon={{ Icon: ShowIcon, css: "fill" }} link={{text:"Forgot", url:"/forgotPassword"}}/>
                 <PrimaryButton type="submit" titleButton="Login"/>
             </form>
             <Divider/>
