@@ -12,6 +12,10 @@ import { ArchiveModal } from "./modals/ArchiveModal";
 import { DeleteModal } from "./modals/DeleteModal";
 import { PageHeader } from "./pageHeader/PageHeader";
 import { PageHeaderControl } from "./pageHeader/PageHeaderControl";
+import { SettingsMenu } from "./sideBar/SettingsMenu";
+import { SideBarAllNotes } from "./sideBar/SideBarAllNotes";
+import { SideBarNavigation } from "./sideBar/SideBarNavigation";
+import { SideBarRightMenu } from "./sideBar/SideBarRightMenu";
 import { Toast } from "./Toast";
 
 export function Components() {
@@ -20,7 +24,7 @@ export function Components() {
             <Logo />
             <PrimaryButton titleButton="Primary Button" isDisabled={false} />
             <SecondaryButton titleButton="Secondary Button" isDisabled={true} />
-            <BorderButton titleButton="Border Button" Icon={RefreshLeftIcon} isDisabled={false} />
+            <BorderButton titleButton="Border Button" icon={{Icon:RefreshLeftIcon, css:"fill"}} isDisabled={false} />
             <DeleteModal />
             <ArchiveModal />
             <Toast titleToast="Note saved successfully!" />
@@ -31,6 +35,10 @@ export function Components() {
             <PageHeader/>
             <PageHeaderControl/>
             <MenuBar/>
+            <SideBarAllNotes/>
+            <SideBarNavigation/>
+            <SettingsMenu/>
+            <SideBarRightMenu/>
         </div>
     )
 }
