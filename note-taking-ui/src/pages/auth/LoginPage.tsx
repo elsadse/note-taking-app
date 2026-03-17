@@ -6,9 +6,12 @@ import { ShowIcon } from "../../components/icons/ShowIcon";
 import { InputTypeGroup } from "../../components/input/InputTypeGroup";
 import { Logo } from "../../components/Logo";
 
-export function Login(){
+export function LoginPage(){
     return(
-       <div className="flex flex-col gap-y-4 px-4 py-10 rounded-12 bg-neutral-0">
+       <div className="flex flex-col gap-y-4 px-4 py-10 rounded-12 bg-neutral-0
+                md:w-128 md:px-8 md:py-12
+                xl:w-135 xl:p-12
+            ">
             <div className="flex flex-col items-center gap-y-2.5 pb-2">
                 <Logo/>
             </div>
