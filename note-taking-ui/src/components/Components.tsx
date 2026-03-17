@@ -34,7 +34,7 @@ export function Components() {
             <InputTypeGroup name="password" placeholder="Password" titleLabel="Password" type="password" textError="This is a hint text to help user." icon={{ Icon: ShowIcon, css: "fill" }} />
             <PageHeader/>
             <PageHeaderControl/>
-            <MenuBar/>
+            <MenuBar itemSelected="Home"/>
             <SideBarAllNotes/>
             <SideBarNavigation/>
             <SettingsMenu/>

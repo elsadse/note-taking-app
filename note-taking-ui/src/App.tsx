@@ -5,6 +5,9 @@ import { LoginPage } from "./pages/auth/LoginPage"
 import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage"
 import { ResetPasswordPage } from "./pages/auth/ResetPasswordPage"
 import { RegisterPage } from "./pages/auth/RegisterPage"
+import { HomeLayout } from "./pages/home/HomeLayout"
+import { ContentAllNote } from "./pages/home/ContentAllNote"
+import { ContentNote } from "./pages/home/ContentNote"
 
 function App() {
 
@@ -16,6 +19,12 @@ function App() {
         <Route path="resetPassword" element={<ResetPasswordPage />} />
         <Route path="register" element={<RegisterPage />} />
       </Route>
+
+      <Route element={<HomeLayout />}>
+        <Route path="" element={<ContentAllNote />} />
+        <Route path="note" element={<ContentNote />} />
+      </Route>
+
       <Route path="component" element={<Components />} />
     </Routes>
 
