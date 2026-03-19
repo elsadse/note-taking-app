@@ -1,6 +1,7 @@
 import { BorderButton } from "./button/BorderButton";
 import { PrimaryButton } from "./button/PrimaryButton";
 import { SecondaryButton } from "./button/SecondaryButton";
+import { EmptyState } from "./EmptyState";
 import { RefreshLeftIcon } from "./icons/RefreshLeftIcon";
 import { SearchIcon } from "./icons/SearchIcon";
 import { ShowIcon } from "./icons/ShowIcon";
@@ -25,8 +26,8 @@ export function Components() {
             <PrimaryButton titleButton="Primary Button" isDisabled={false} />
             <SecondaryButton titleButton="Secondary Button" isDisabled={false} />
             <BorderButton titleButton="Border Button" icon={{Icon:RefreshLeftIcon, css:"fill"}} isDisabled={false} />
-            <DeleteModal />
-            <ArchiveModal />
+            <DeleteModal onClose={()=>console.log("close")} />
+            <ArchiveModal onClose={()=>console.log("close")}/>
             <Toast titleToast="Note saved successfully!" />
             <Toast titleToast="Note archived" link="Archived Notes" />
             <InputField name="search" placeholder="Search" type="text" icons={{IconBeforeInput:SearchIcon, css:"stroke"}} />
@@ -39,6 +40,7 @@ export function Components() {
             <SideBarNavigation/>
             <SettingsMenu/>
             <SideBarRightMenu/>
+            <EmptyState text="You don’t have any notes yet. Start a new note to capture your thoughts and ideas."/>
         </div>
     )
 }

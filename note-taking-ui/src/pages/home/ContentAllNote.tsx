@@ -70,7 +70,7 @@ export function ContentAllNote() {
 
     return (
         <div className="flex flex-col gap-y-4 px-4 py-5 bg-neutral-0 flex-1 overflow-hidden">
-            {sideBarItemSelected === "Home" || menuItemSelected === "Home" && <span className="sans-serif-text-preset-1 text-neutral-950">All Notes</span>}
+            {sideBarItemSelected === "Home" && menuItemSelected === "Home" && <span className="sans-serif-text-preset-1 text-neutral-950">All Notes</span>}
             {sideBarItemSelected === "Archive" || menuItemSelected === "Archive" && <span className="sans-serif-text-preset-1 text-neutral-950">Archived Notes</span>}
             {sideBarItemSelected === "Archive" || menuItemSelected === "Archive" && <span className="text-neutral-700 sans-serif-text-preset-5">All your archived notes are stored here. You can restore or delete them anytime.</span>}
             <div className="flex flex-col gap-y-4 overflow-y-auto">
