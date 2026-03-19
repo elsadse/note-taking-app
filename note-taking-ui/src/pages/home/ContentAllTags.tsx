@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router"
 import { PrimaryButton } from "../../components/button/PrimaryButton"
 import { Divider } from "../../components/Divider"
 import { PlusIcon } from "../../components/icons/PlusIcon"
 import { SideBarItem } from "../../components/sideBar/SideBarNavigation"
 
 export function ContentAllTags() {
+
+    const navigate= useNavigate()
 
     const tags = ["Cooking", "Dev", "Ideas", "Fitness", "Health", "Personal", "React", "Recipes", "Shopping", "Travel", "TypeScrit"]
 
@@ -18,7 +21,7 @@ export function ContentAllTags() {
                     </div>
                 ))}
             </div>
-            <div className="absolute top-[80vh] right-12">
+            <div className="absolute top-[80vh] right-12" onClick={()=>navigate("/createNote")}>
                 <PrimaryButton icon={{ Icon: PlusIcon, css: "fill" }} className="rounded-full size-12" iconClassName="size-4.5" />
             </div>
         </div>

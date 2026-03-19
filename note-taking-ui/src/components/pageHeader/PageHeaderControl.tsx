@@ -6,7 +6,7 @@ import { useGlobalStore, type GlobalStore } from "../../hooks/useGlobalStore";
 import { useShallow } from "zustand/shallow";
 import { RefreshLeftIcon } from "../icons/RefreshLeftIcon";
 
-export function PageHeaderControl() {
+export function PageHeaderControl({ isCreate = false }: { isCreate?: boolean }) {
 
     const { sideBarItemSelected, menuItemSelected } = useGlobalStore(
         useShallow((store: GlobalStore) => ({
@@ -24,9 +24,13 @@ export function PageHeaderControl() {
                 </div>
             </Link>
             <div className="flex flex-row gap-x-4">
-                <DeleteIcon className="size-4.5 stroke-neutral-600" />
-                {sideBarItemSelected === "Home" && menuItemSelected !== "Archive" && <ArchiveIcon className="size-4.5 stroke-neutral-600" />}
-                {sideBarItemSelected === "Archive" || menuItemSelected === "Archive" && <RefreshLeftIcon className="size-4.5 fill-neutral-600" />}
+                {!isCreate && (
+                    <>
+                        <DeleteIcon className="size-4.5 stroke-neutral-600" />
+                        {sideBarItemSelected === "Home" && menuItemSelected !== "Archive" && <ArchiveIcon className="size-4.5 stroke-neutral-600" />}
+                        {sideBarItemSelected === "Archive" || menuItemSelected === "Archive" && <RefreshLeftIcon className="size-4.5 fill-neutral-600" />}
+                    </>
+                )}
                 <span className="sans-serif-text-preset-5 text-neutral-600">Cancel</span>
                 <span className="sans-serif-text-preset-5 text-neutral-blue-500">Save Note</span>
             </div>

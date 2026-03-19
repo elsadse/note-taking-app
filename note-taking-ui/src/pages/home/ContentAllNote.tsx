@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { NoteItem } from "../../components/sideBar/SideBarAllNotes";
 import { Divider } from "../../components/Divider";
 import { PlusIcon } from "../../components/icons/PlusIcon";
@@ -14,6 +14,8 @@ export function ContentAllNote() {
             menuItemSelected: store.menuItemSelected,
         }))
     )
+
+    const navigate= useNavigate()
 
     const notes = [
         {
@@ -81,7 +83,7 @@ export function ContentAllNote() {
                     </div>
                 ))}
             </div>
-            <div className="absolute top-[80vh] right-12">
+            <div className="absolute top-[80vh] right-12" onClick={()=>navigate("/createNote")}>
                 <PrimaryButton icon={{ Icon: PlusIcon, css: "fill" }} className="rounded-full size-12" iconClassName="size-4.5" />
             </div>
         </div>
