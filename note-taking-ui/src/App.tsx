@@ -15,6 +15,7 @@ import { SettingsColorTheme } from "./pages/home/settings/SettingsColorTheme"
 import { useBreakpoint } from "./hooks/useBreakPoint"
 import { ContentHomeDesktop } from "./pages/home/ContentHomeDesktop"
 import { ContentSettingsDesktop } from "./pages/home/settings/ContentSettingsDesktop"
+import { SettingsFontOption } from "./pages/home/settings/SettingsFontOption"
 
 function App() {
 
@@ -35,7 +36,8 @@ function App() {
         <Route path="tags" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentAllTags />} />
         <Route path="search" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentSearch />} />
         <Route path="settings" element={bp === "xl" ? <ContentSettingsDesktop /> : <ContentSettings />} />
-        <Route path="colorTheme" element={bp === "xl" ? <Navigate to="/" replace /> : <SettingsColorTheme />} />
+        <Route path="colorTheme" element={bp === "xl" ? <ContentSettingsDesktop/> : <SettingsColorTheme />} />
+        <Route path="fontTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsFontOption />} />
       </Route>
 
       <Route path="component" element={<Components />} />
