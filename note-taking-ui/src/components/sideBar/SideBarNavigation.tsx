@@ -1,10 +1,20 @@
+import { useState } from "react";
 import { ArchiveIcon } from "../icons/ArchiveIcon";
 import { ChevronRightIcon } from "../icons/ChevronRightIcon";
 import { HomeIcon } from "../icons/HomeIcon";
 import { TagIcon } from "../icons/TagIcon";
 import { Logo } from "../Logo";
+import { useGlobalStore, type GlobalStore } from "../../hooks/useGlobalStore";
+import { useShallow } from "zustand/shallow";
 
 export function SideBarNavigation() {
+    const [selectedItem, setSelectedItem] = useState<"Home" | "Archive">("Home")
+
+    const { setSideBarItemSelected } = useGlobalStore(
+        useShallow((store: GlobalStore) => ({
+            setSideBarItemSelected: store.setSideBarItemSelected,
+        }))
+    )
 
     const tags = ["Cooking", "Dev", "Ideas", "Fitness", "Health", "Personal", "React", "Recipes", "Shopping", "Travel", "TypeScrit"]
 
@@ -13,14 +23,29 @@ export function SideBarNavigation() {
             <Logo />
             <div className="flex flex-col gap-y-2">
                 <div className="flex flex-col gap-y-1 justify-between">
-                    <div className="flex flex-row gap-x-2 px-3 py-2.5 rounded-8 bg-neutral-100 items-center justify-between">
-                        <HomeIcon className="size-5 fill-neutral-blue-500" />
+                    <div 
+                        onClick={() => {
+                            if (selectedItem === "Archive") {
+                                setSelectedItem("Home")
+                                setSideBarItemSelected("Home")
+                            }
+                        }}
+                        className={`flex flex-row gap-x-2 px-3 py-2.5 rounded-8 items-center justify-between ${selectedItem==="Home"?"bg-neutral-100":""}`}>
+                        <HomeIcon className={`size-5 ${selectedItem==="Home"?"fill-neutral-blue-500":"fill-neutral-700"}`} />
                         <span className="w-full sans-serif-text-preset-4 text-neutral-950">All Notes</span>
-                        <ChevronRightIcon className="size-5 fill-neutral-950" />
+                        {selectedItem === "Home" && <ChevronRightIcon className="size-5 fill-neutral-950" />}
                     </div>
-                    <div className="flex flex-row gap-x-2 px-3 py-2.5 rounded-8 items-center justify-between">
-                        <ArchiveIcon className="size-5 stroke-neutral-700" />
-                        <p className="w-full sans-serif-text-preset-4 text-neutral-700">Archived Notes</p>
+                    <div 
+                        onClick={() => {
+                            if (selectedItem === "Home") {
+                                setSelectedItem("Archive")
+                                setSideBarItemSelected("Archive")
+                            }
+                        }}
+                        className={`flex flex-row gap-x-2 px-3 py-2.5 rounded-8 items-center justify-between ${selectedItem==="Archive"?"bg-neutral-100":""}`}>
+                        <ArchiveIcon className={`size-5 ${selectedItem==="Archive"?"stroke-neutral-blue-500":"stroke-neutral-700"}`} />
+                        <span className="w-full sans-serif-text-preset-4 text-neutral-700">Archived Notes</span>
+                        {selectedItem === "Archive" && <ChevronRightIcon className="size-5 fill-neutral-950" />}
                     </div>
                 </div>
                 <div className="h-0.25 bg-neutral-200 shrink-0" />

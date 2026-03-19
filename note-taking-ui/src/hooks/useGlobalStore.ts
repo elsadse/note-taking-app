@@ -1,12 +1,14 @@
 import { create } from "zustand"
 
+export type SideBarItem = "Home" | "Archive"
+
 export type GlobalStore = {
-    menuItemSelected:string,
-    setMenuItemSelected: (menuItemSelected:string)=>void,
+    sideBarItemSelected: SideBarItem,
+    setSideBarItemSelected: (sideBarItemSelected: SideBarItem) => void,
 }
 
 
 export const useGlobalStore = create<GlobalStore>()((set) => ({
-    menuItemSelected: "Home",
-    setMenuItemSelected: (menuItemSelected: string) => set({ menuItemSelected })
+    sideBarItemSelected: "Home",
+    setSideBarItemSelected: (sideBarItemSelected: SideBarItem) => set({ sideBarItemSelected })
 }))

@@ -1,7 +1,15 @@
+import { useShallow } from "zustand/shallow"
 import { PrimaryButton } from "../button/PrimaryButton"
 import { PlusIcon } from "../icons/PlusIcon"
+import { useGlobalStore, type GlobalStore } from "../../hooks/useGlobalStore"
 
 export function SideBarAllNotes() {
+
+    const { sideBarItemSelected } = useGlobalStore(
+        useShallow((store: GlobalStore) => ({
+            sideBarItemSelected: store.sideBarItemSelected,
+        }))
+    )
 
     const notes = [
         {
@@ -33,6 +41,7 @@ export function SideBarAllNotes() {
     return (
         <div className="flex flex-col gap-y-4 pl-8 pr-4 py-5 bg-neutral-0 border-r border-neutral-200 h-full">
             <PrimaryButton titleButton="Create New Note" icon={{ Icon: PlusIcon, css: "fill" }} />
+            {sideBarItemSelected==="Archive" && <span className="text-neutral-700 sans-serif-text-preset-5">All your archived notes are stored here. You can restore or delete them anytime.</span>}
             <div className="flex flex-col gap-y-1 overflow-y-auto">
                 {notes.map((note, noteIndex) => (
                     <div className="flex flex-col">
