@@ -3,6 +3,7 @@ import { useGlobalStore, type GlobalStore } from "../../../hooks/useGlobalStore"
 import { ContentSettings } from "./ContentSettings";
 import { SettingsColorTheme } from "./SettingsColorTheme";
 import { SettingsFontOption } from "./SettingsFontOption";
+import { SettingsChangePassword } from "./SettingsChangePassword";
 
 export function ContentSettingsDesktop() {
 
@@ -20,6 +21,7 @@ export function ContentSettingsDesktop() {
             <div className="flex-2 flex flex-col gap-y-4 px-6 py-5">
                 {settingMenuItemSelected==="ColorTheme" && <SettingsColorTheme />}
                 {settingMenuItemSelected==="FontTheme" && <SettingsFontOption />}
+                {settingMenuItemSelected==="ChangePassword" && <SettingsChangePassword />}
             </div>
             <div className="flex-1">
             </div>

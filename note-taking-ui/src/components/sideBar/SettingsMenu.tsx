@@ -35,7 +35,7 @@ export function SettingsMenu() {
             <MenuItem
                 onClick={() => {
                     setSettingMenuItemSelected("ChangePassword")
-                    //navigate("/fontTheme")
+                    navigate("/changePassword")
                 }}
                 titleMenu="Change Password" icon={{ Icon: ChainIcon, css: "stroke" }} />
             <Divider />
