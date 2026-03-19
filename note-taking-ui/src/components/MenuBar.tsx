@@ -6,6 +6,7 @@ import { SettingsIcon } from "./icons/SettingsIcon"
 import { TagIcon } from "./icons/TagIcon"
 import { useGlobalStore, type GlobalStore } from "../hooks/useGlobalStore"
 import { useShallow } from "zustand/shallow"
+import { useNavigate } from "react-router"
 
 
 export function MenuBar() {
@@ -17,6 +18,8 @@ export function MenuBar() {
         }))
     )
 
+    const navigate= useNavigate()
+
     return (
         <div className="flex flex-row px-4 py-3 justify-between bg-neutral-0 md:px-8">
             <MenuBarItem
@@ -25,6 +28,7 @@ export function MenuBar() {
                         setSelectedItem("Home")
                         setMenuItemSelected("Home")
                     }
+                    navigate("/")
                 }}
                 icon={{ Icon: HomeIcon, css: "fill" }} textIcon="Home" isSelected={selectedItem === "Home"} />
             <MenuBarItem 
@@ -49,6 +53,7 @@ export function MenuBar() {
                         setSelectedItem("Tags")
                         setMenuItemSelected("Tags")
                     }
+                    navigate("/tags")
                 }} 
                 icon={{ Icon: TagIcon, css: "stroke" }} textIcon="Tags" isSelected={selectedItem === "Tags"}/>
             <MenuBarItem 

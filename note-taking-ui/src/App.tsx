@@ -8,6 +8,7 @@ import { RegisterPage } from "./pages/auth/RegisterPage"
 import { ContentAllNote } from "./pages/home/ContentAllNote"
 import { ContentNote } from "./pages/home/ContentNote"
 import { HomeLayout } from "./pages/home/HomeLayout"
+import { ContentAllTags } from "./pages/home/ContentAllTags"
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Route element={<HomeLayout />}>
         <Route path="" element={<ContentAllNote />} />
         <Route path="note" element={<ContentNote />} />
+        <Route path="tags" element={<ContentAllTags />} />
       </Route>
 
       <Route path="component" element={<Components />} />
