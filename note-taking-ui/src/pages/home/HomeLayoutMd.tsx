@@ -7,7 +7,7 @@ export function HomeLayoutMd() {
         <div className="relative flex flex-col h-screen">
             <PageHeader />
             <Outlet/>
-            <MenuBar itemSelected="Home"/>
+            <MenuBar/>
         </div>
     )
 }
