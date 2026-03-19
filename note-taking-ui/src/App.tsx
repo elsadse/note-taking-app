@@ -10,6 +10,8 @@ import { ContentNote } from "./pages/home/ContentNote"
 import { HomeLayout } from "./pages/home/HomeLayout"
 import { ContentAllTags } from "./pages/home/ContentAllTags"
 import { ContentSearch } from "./pages/home/ContentSearch"
+import { ContentSettings } from "./pages/home/ContentSettings"
+import { SettingsColorTheme } from "./pages/home/SettingsColorTheme"
 
 function App() {
 
@@ -27,6 +29,8 @@ function App() {
         <Route path="note" element={<ContentNote />} />
         <Route path="tags" element={<ContentAllTags />} />
         <Route path="search" element={<ContentSearch />} />
+        <Route path="settings" element={<ContentSettings />} />
+        <Route path="colorTheme" element={<SettingsColorTheme />} />
       </Route>
 
       <Route path="component" element={<Components />} />

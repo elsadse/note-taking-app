@@ -63,6 +63,7 @@ export function MenuBar() {
                     if (selectedItem !== "Settings") {
                         setSelectedItem("Settings")
                         setMenuItemSelected("Settings")
+                        navigate("/settings")
                     }
                 }} 
                 icon={{ Icon: SettingsIcon, css: "fill" }} textIcon="Settings" isSelected={selectedItem === "Settings"}/>
