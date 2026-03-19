@@ -1,10 +1,10 @@
 import { useBreakpoint } from "../../hooks/useBreakPoint";
 import { HomeLayoutMd } from "./HomeLayoutMd";
-import { HomePageDesktop } from "./HomePageDesktop";
+import { HomePageDesktopLayout } from "./HomePageDesktopLayout";
 
 export function HomeLayout() {
     const bp = useBreakpoint();
     
-    if (bp === "xl") return <HomePageDesktop />;
+    if (bp === "xl") return <HomePageDesktopLayout />;
     return <HomeLayoutMd />;
 }

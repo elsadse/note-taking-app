@@ -11,8 +11,9 @@ import { SideBarNavigation } from "../../components/sideBar/SideBarNavigation";
 import { SideBarRightMenu } from "../../components/sideBar/SideBarRightMenu";
 import { useGlobalStore, type GlobalStore } from "../../hooks/useGlobalStore";
 import { DisplayNote } from "./ContentNote";
+import { Link, Outlet } from "react-router";
 
-export function HomePageDesktop() {
+export function HomePageDesktopLayout() {
     const { sideBarItemSelected } = useGlobalStore(
         useShallow((store: GlobalStore) => ({
             sideBarItemSelected: store.sideBarItemSelected,
@@ -27,25 +28,12 @@ export function HomePageDesktop() {
                     <span className="sans-serif-text-preset-1 text-neutral-950">{sideBarItemSelected === "Home" ? "All Notes" : "Archived Notes"}</span>
                     <div className="flex flex-row gap-x-4 items-center">
                         <InputField name="search" placeholder="Search by title, content, or tags…" type="text" icons={{ IconBeforeInput: SearchIcon, css: "stroke" }} />
-                        <MenuBarItem icon={{ Icon: SettingsIcon, css: "fill" }} textIcon="Settings" />
+                        <Link to="/settings">
+                            <MenuBarItem icon={{ Icon: SettingsIcon, css: "fill" }} textIcon="Settings" />
+                        </Link>
                     </div>
                 </div>
-                <div className="flex flex-row pr-4 flex-1">
-                    <div className="h-full flex-1">
-                        <SideBarAllNotes />
-                    </div>
-                    <div className="flex-2 flex flex-col gap-y-4 px-6 py-5 border-r border-neutral-200">
-                        <DisplayNote />
-                        <Divider />
-                        <div className="flex flex-row gap-x-4">
-                            <PrimaryButton titleButton="Save Note" />
-                            <SecondaryButton titleButton="Cancel" />
-                        </div>
-                    </div>
-                    <div className="flex-1">
-                        <SideBarRightMenu />
-                    </div>
-                </div>
+                <Outlet/>
             </div>
         </div>
     )

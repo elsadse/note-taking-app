@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router"
+import { Navigate, Route, Routes } from "react-router"
 import { Components } from "./components/Components"
 import { AuthLayout } from "./pages/auth/AuthLayout"
 import { LoginPage } from "./pages/auth/LoginPage"
@@ -10,10 +10,15 @@ import { ContentNote } from "./pages/home/ContentNote"
 import { HomeLayout } from "./pages/home/HomeLayout"
 import { ContentAllTags } from "./pages/home/ContentAllTags"
 import { ContentSearch } from "./pages/home/ContentSearch"
-import { ContentSettings } from "./pages/home/ContentSettings"
-import { SettingsColorTheme } from "./pages/home/SettingsColorTheme"
+import { ContentSettings } from "./pages/home/settings/ContentSettings"
+import { SettingsColorTheme } from "./pages/home/settings/SettingsColorTheme"
+import { useBreakpoint } from "./hooks/useBreakPoint"
+import { ContentHomeDesktop } from "./pages/home/ContentHomeDesktop"
+import { ContentSettingsDesktop } from "./pages/home/settings/ContentSettingsDesktop"
 
 function App() {
+
+  const bp = useBreakpoint();
 
   return (
     <Routes>
@@ -25,12 +30,12 @@ function App() {
       </Route>
 
       <Route element={<HomeLayout />}>
-        <Route path="" element={<ContentAllNote />} />
-        <Route path="note" element={<ContentNote />} />
-        <Route path="tags" element={<ContentAllTags />} />
-        <Route path="search" element={<ContentSearch />} />
-        <Route path="settings" element={<ContentSettings />} />
-        <Route path="colorTheme" element={<SettingsColorTheme />} />
+        <Route path="" element={bp === "xl" ? <ContentHomeDesktop /> : <ContentAllNote />} />
+        <Route path="note" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentNote />} />
+        <Route path="tags" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentAllTags />} />
+        <Route path="search" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentSearch />} />
+        <Route path="settings" element={bp === "xl" ? <ContentSettingsDesktop /> : <ContentSettings />} />
+        <Route path="colorTheme" element={bp === "xl" ? <Navigate to="/" replace /> : <SettingsColorTheme />} />
       </Route>
 
       <Route path="component" element={<Components />} />
