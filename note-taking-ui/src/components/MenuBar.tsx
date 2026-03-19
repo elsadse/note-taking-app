@@ -36,6 +36,7 @@ export function MenuBar() {
                     if (selectedItem !== "Search") {
                         setSelectedItem("Search")
                         setMenuItemSelected("Search")
+                        navigate("/search")
                     }
                 }}
                 icon={{ Icon: SearchIcon, css: "stroke" }} textIcon="Search" isSelected={selectedItem === "Search"}/>
@@ -44,6 +45,7 @@ export function MenuBar() {
                     if (selectedItem !== "Archive") {
                         setSelectedItem("Archive")
                         setMenuItemSelected("Archive")
+                        navigate("/")
                     }
                 }}
                 icon={{ Icon: ArchiveIcon, css: "stroke" }} textIcon="Archived" isSelected={selectedItem === "Archive"}/>

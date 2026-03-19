@@ -9,6 +9,7 @@ import { ContentAllNote } from "./pages/home/ContentAllNote"
 import { ContentNote } from "./pages/home/ContentNote"
 import { HomeLayout } from "./pages/home/HomeLayout"
 import { ContentAllTags } from "./pages/home/ContentAllTags"
+import { ContentSearch } from "./pages/home/ContentSearch"
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="" element={<ContentAllNote />} />
         <Route path="note" element={<ContentNote />} />
         <Route path="tags" element={<ContentAllTags />} />
+        <Route path="search" element={<ContentSearch />} />
       </Route>
 
       <Route path="component" element={<Components />} />
