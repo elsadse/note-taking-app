@@ -3,6 +3,7 @@ import { create } from "zustand"
 export type SideBarItem = "Home" | "Archive"
 export type MenuItem = SideBarItem | "Search" | "Tags" | "Settings"
 export type SettingsMenuItem = "ColorTheme" | "FontTheme" | "ChangePassword" | "Logout"
+export type ActionType = "Delete" | "Archive" | "Restore" | ""
 
 export type GlobalStore = {
     sideBarItemSelected: SideBarItem,
@@ -17,6 +18,10 @@ export type GlobalStore = {
 
     settingMenuItemSelected: SettingsMenuItem,
     setSettingMenuItemSelected: (settingMenuItemSelected: SettingsMenuItem) => void,
+
+    actionSelected: ActionType,
+    setActionSelected: (actionSelected: ActionType) => void,
+
 }
 
 
@@ -30,7 +35,7 @@ export const useGlobalStore = create<GlobalStore>()((set) => ({
     tagFilters: [],
     addTagFilter: (tag: string) => set((store) => {
         const tagFilters = [...store.tagFilters, tag]
-        return {tagFilters }
+        return { tagFilters }
     }),
     removeTagFilter: (tag: string) => set((store) => {
         const tagFilters = store.tagFilters.filter((t) => t !== tag)
@@ -39,4 +44,7 @@ export const useGlobalStore = create<GlobalStore>()((set) => ({
 
     settingMenuItemSelected: "ColorTheme",
     setSettingMenuItemSelected: (settingMenuItemSelected: SettingsMenuItem) => set({ settingMenuItemSelected }),
+
+    actionSelected: "",
+    setActionSelected: (actionSelected: ActionType) => set({ actionSelected }),
 }))

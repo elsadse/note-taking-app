@@ -3,7 +3,7 @@ import { HomeLayoutMd } from "./HomeLayoutMd";
 import { HomePageDesktopLayout } from "./HomePageDesktopLayout";
 
 export function HomeLayout() {
-    const bp = useBreakpoint();
+    const bp = useBreakpoint()
     
     if (bp === "xl") return <HomePageDesktopLayout />;
     return <HomeLayoutMd />;
