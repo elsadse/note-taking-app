@@ -10,9 +10,10 @@ type InputFieldProps = {
     name: string,
     placeholder: string,
     isError?: boolean,
+    onIconClick?: ()=>void,
 }
 
-export function InputField({ icons, type, name, placeholder, isError }: InputFieldProps) {
+export function InputField({ icons, type, name, placeholder, isError, onIconClick }: InputFieldProps) {
     const [inputValue, setInputValue] = useState("")
 
     return (
@@ -28,7 +29,11 @@ export function InputField({ icons, type, name, placeholder, isError }: InputFie
                     className="sans-serif-text-preset-5 text-neutral-950
                     focus:outline-none placeholder:text-neutral-500" />
             </div>
-            {icons && icons.IconAfterInput && <icons.IconAfterInput className={`size-5 ${icons.css}-neutral-500`} />}
+            {icons && icons.IconAfterInput && (
+                <div onClick={onIconClick}>
+                    <icons.IconAfterInput className={`size-5 ${icons.css}-neutral-500`} />
+                </div>
+            )}
         </div>
     )
 }
