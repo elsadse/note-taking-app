@@ -1,3 +1,5 @@
+import { PrimaryButton } from "../components/button/PrimaryButton";
+import { SecondaryButton } from "../components/button/SecondaryButton";
 import { Divider } from "../components/Divider";
 import { CircleClockIcon } from "../components/icons/CircleClockIcon";
 import { TagIcon } from "../components/icons/TagIcon";
@@ -13,7 +15,7 @@ export function CreateNote() {
                     ">
             {bp !== "xl" && (
                 <>
-                    <PageHeaderControl isCreate={true} /> 
+                    <PageHeaderControl isCreate={true} />
                     <Divider />
                 </>
             )}
@@ -26,6 +28,10 @@ export function CreateNote() {
                 <textarea className="sans-serif-text-preset-5 text-neutral-800 flex-1 overflow-hidden"
                     defaultValue="" placeholder="Start typing your note here">
                 </textarea>
+                <div className="flex flex-row gap-x-4">
+                    <PrimaryButton titleButton="Save Note" />
+                    <SecondaryButton titleButton="Cancel" />
+                </div>
             </form>
         </div>
     )
