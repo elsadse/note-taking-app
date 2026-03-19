@@ -10,9 +10,20 @@ export function ContentNote() {
                 md:gap-y-4 md:px-8 md:py-6
             ">
             <PageHeaderControl />
+            <DisplayNote />
+        </div>
+    )
+
+}
+
+
+export function DisplayNote() {
+    return (
+        <div className="w-full flex flex-col gap-y-3 bg-neutral-0 flex-1 overflow-hidden
+                md:gap-y-4">
             <span className="sans-serif-text-preset-1 text-neutral-950">React Performance Optimization</span>
             <PropertyItem />
-            <Divider/>
+            <Divider />
             <textarea className="sans-serif-text-preset-5 text-neutral-800 flex-1 overflow-hidden"
                 defaultValue="Key performance optimization techniques:
 
@@ -31,9 +42,9 @@ export function ContentNote() {
 
                 TODO: Benchmark current application and identify bottlenecks">
             </textarea>
+
         </div>
     )
-
 }
 
 

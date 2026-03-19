@@ -27,11 +27,11 @@ export function SideBarAllNotes() {
             tags: ["Dev", "React", "TypeScript"],
             date: "26 Oct 2024",
             selected: false
-        }
+        },
     ]
 
     return (
-        <div className="flex flex-col gap-y-4 pl-8 pr-4 py-5 bg-neutral-0 border border-neutral-200">
+        <div className="flex flex-col gap-y-4 pl-8 pr-4 py-5 bg-neutral-0 border-r border-neutral-200 h-full">
             <PrimaryButton titleButton="Create New Note" icon={{ Icon: PlusIcon, css: "fill" }} />
             <div className="flex flex-col gap-y-1 overflow-y-auto">
                 {notes.map((note, noteIndex) => (

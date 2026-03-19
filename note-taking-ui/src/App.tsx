@@ -5,9 +5,9 @@ import { LoginPage } from "./pages/auth/LoginPage"
 import { ForgotPasswordPage } from "./pages/auth/ForgotPasswordPage"
 import { ResetPasswordPage } from "./pages/auth/ResetPasswordPage"
 import { RegisterPage } from "./pages/auth/RegisterPage"
-import { HomeLayout } from "./pages/home/HomeLayout"
 import { ContentAllNote } from "./pages/home/ContentAllNote"
 import { ContentNote } from "./pages/home/ContentNote"
+import { HomeLayout } from "./pages/home/HomeLayout"
 
 function App() {
 

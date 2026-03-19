@@ -9,7 +9,7 @@ export function SideBarNavigation() {
     const tags = ["Cooking", "Dev", "Ideas", "Fitness", "Health", "Personal", "React", "Recipes", "Shopping", "Travel", "TypeScrit"]
 
     return (
-        <div className="w-68 h-screen flex flex-col justify-center gap-y-4 px-4 py-3 border border-neutral-200">
+        <div className="w-68 h-full flex flex-col items-center gap-y-4 px-4 py-3 border-r border-neutral-200">
             <Logo />
             <div className="flex flex-col gap-y-2">
                 <div className="flex flex-col gap-y-1 justify-between">
@@ -40,7 +40,7 @@ export function SideBarNavigation() {
 
 export function SideBarItem({ tag }: { tag: string }) {
     return (
-        <div className="flex flex-row gap-x-2 px-3 py-2.5 rounded-8 items-center">
+        <div className="flex flex-row gap-x-2 py-2.5 rounded-8 items-center">
             <TagIcon className="size-5 stroke-neutral-700" />
             <span className="w-full sans-serif-text-preset-4 text-neutral-700">{tag}</span>
         </div>

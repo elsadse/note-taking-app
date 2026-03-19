@@ -1,13 +1,10 @@
-import { Outlet } from "react-router";
-import { MenuBar } from "../../components/MenuBar";
-import { PageHeader } from "../../components/pageHeader/PageHeader";
+import { useBreakpoint } from "../../hooks/useBreakPoint";
+import { HomeLayoutMd } from "./HomeLayoutMd";
+import { HomePageDesktop } from "./HomePageDesktop";
 
 export function HomeLayout() {
-    return (
-        <div className="relative flex flex-col h-screen">
-            <PageHeader />
-            <Outlet/>
-            <MenuBar itemSelected="Home"/>
-        </div>
-    )
+    const bp = useBreakpoint();
+    
+    if (bp === "xl") return <HomePageDesktop />;
+    return <HomeLayoutMd />;
 }
