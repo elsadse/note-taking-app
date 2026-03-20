@@ -10,7 +10,7 @@ import { ArchiveModal } from "../../components/modals/ArchiveModal";
 import { DeleteModal } from "../../components/modals/DeleteModal";
 
 export function HomePageDesktopLayout() {
-    const { sideBarItemSelected, actionSelected, setActionSelected } = useGlobalStore(
+    const { sideBarItemSelected, actionSelected, setActionSelected} = useGlobalStore(
         useShallow((store: GlobalStore) => ({
             sideBarItemSelected: store.sideBarItemSelected,
             actionSelected: store.actionSelected,
@@ -41,7 +41,9 @@ export function HomePageDesktopLayout() {
             <SideBarNavigation />
             <div className="w-full flex flex-col">
                 <div className="flex flex-row justify-between items-center px-8 py-4 border-b border-neutral-200">
-                    <span className="sans-serif-text-preset-1 text-neutral-950">{sideBarItemSelected === "Home" ? "All Notes" : "Archived Notes"}</span>
+                    <span className="sans-serif-text-preset-1 text-neutral-950">
+                        {sideBarItemSelected === "Home" ? "All Notes" : "Archived Notes"}
+                    </span>
                     <div className="flex flex-row gap-x-4 items-center">
                         <InputField name="search" placeholder="Search by title, content, or tags…" type="text" icons={{ IconBeforeInput: SearchIcon, css: "stroke" }} />
                         <Link to="/settings">
