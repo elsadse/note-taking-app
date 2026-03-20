@@ -12,7 +12,7 @@ import { ContentAllTags } from "./pages/home/ContentAllTags"
 import { ContentSearch } from "./pages/home/ContentSearch"
 import { ContentSettings } from "./pages/home/settings/ContentSettings"
 import { SettingsColorTheme } from "./pages/home/settings/SettingsColorTheme"
-import { useBreakpoint } from "./hooks/useBreakPoint"
+import { useBreakPoint } from "./hooks/useBreakPoint"
 import { ContentHomeDesktop } from "./pages/home/ContentHomeDesktop"
 import { ContentSettingsDesktop } from "./pages/home/settings/ContentSettingsDesktop"
 import { SettingsFontOption } from "./pages/home/settings/SettingsFontOption"
@@ -22,7 +22,7 @@ import { ContentCreateNote } from "./pages/home/ContentCreateNote"
 
 function App() {
 
-  const bp = useBreakpoint();
+  const bp = useBreakPoint();
 
   return (
     <Routes>
@@ -39,7 +39,7 @@ function App() {
         <Route path="tags" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentAllTags />} />
         <Route path="search" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentSearch />} />
         <Route path="settings" element={bp === "xl" ? <ContentSettingsDesktop /> : <ContentSettings />} />
-        <Route path="colorTheme" element={bp === "xl" ? <ContentSettingsDesktop/> : <SettingsColorTheme />} />
+        <Route path="colorTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsColorTheme />} />
         <Route path="fontTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsFontOption />} />
         <Route path="changePassword" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsChangePassword />} />
         <Route path="createNote" element={bp === "xl" ? <ContentCreateNote /> : <CreateNote />} />

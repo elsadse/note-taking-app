@@ -4,10 +4,10 @@ import { Divider } from "../components/Divider";
 import { CircleClockIcon } from "../components/icons/CircleClockIcon";
 import { TagIcon } from "../components/icons/TagIcon";
 import { PageHeaderControl } from "../components/pageHeader/PageHeaderControl";
-import { useBreakpoint } from "../hooks/useBreakPoint";
+import { useBreakPoint } from "../hooks/useBreakPoint";
 
 export function CreateNote() {
-    const bp = useBreakpoint()
+    const bp = useBreakPoint()
 
     return (
         <div className="flex flex-col gap-y-3 px-4 py-5 bg-neutral-0 flex-1 overflow-hidden

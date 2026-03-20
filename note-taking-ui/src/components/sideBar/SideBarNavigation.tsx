@@ -72,7 +72,7 @@ export function SideBarItem({ tag }: { tag: string }) {
         }))
     )
 
-    let isSelected = tagFilters.includes(tag)
+    const isSelected = tagFilters.includes(tag)
 
     return (
         <div

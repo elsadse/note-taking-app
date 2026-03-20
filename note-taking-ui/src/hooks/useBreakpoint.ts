@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 type Breakpoint = "md" | "xl";
 
-export function useBreakpoint(): Breakpoint {
+export function useBreakPoint(): Breakpoint {
     const getBreakpoint = (): Breakpoint => {
         if (window.innerWidth >= 1440) return "xl";
         return "md";
