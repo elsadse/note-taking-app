@@ -5,8 +5,10 @@ import { ChevronRightIcon } from "../icons/ChevronRightIcon"
 import { LogoutIcon } from "../icons/LogoutIcon"
 import { SansSerifIcon } from "../icons/SansSerifIcon"
 import { SunIcon } from "../icons/SunIcon"
-import { useGlobalStore, type GlobalStore } from "../../hooks/useGlobalStore"
+import { useGlobalStore, type GlobalStore, type SettingsMenuItem } from "../../hooks/useGlobalStore"
 import { useShallow } from "zustand/shallow"
+import { useState } from "react"
+import { useAuthContext } from "../../hooks/useAuthContext"
 
 export function SettingsMenu() {
 
@@ -15,6 +17,9 @@ export function SettingsMenu() {
             setSettingMenuItemSelected: store.setSettingMenuItemSelected,
         }))
     )
+    const { logout } = useAuthContext()
+
+    const [isSelected, setIsSelected]= useState<SettingsMenuItem>("ColorTheme")
 
     const navigate = useNavigate()
 
@@ -23,27 +28,31 @@ export function SettingsMenu() {
             <MenuItem
                 onClick={() => {
                     setSettingMenuItemSelected("ColorTheme")
+                    setIsSelected("ColorTheme")
                     navigate("/colorTheme")
                 }}
-                titleMenu="Color Theme" icon={{ Icon: SunIcon, css: "stroke" }} iconLeft={{ Icon: ChevronRightIcon, css: "fill" }} />
+                titleMenu="Color Theme" icon={{ Icon: SunIcon, css: "stroke" }} 
+                isSelected={isSelected==="ColorTheme"}/>
             <MenuItem
                 onClick={() => {
                     setSettingMenuItemSelected("FontTheme")
+                    setIsSelected("FontTheme")
                     navigate("/fontTheme")
                 }}
-                titleMenu="Font Theme" icon={{ Icon: SansSerifIcon, css: "fill" }} />
+                titleMenu="Font Theme" icon={{ Icon: SansSerifIcon, css: "fill" }} 
+                isSelected={isSelected==="FontTheme"}/>
             <MenuItem
                 onClick={() => {
                     setSettingMenuItemSelected("ChangePassword")
+                    setIsSelected("ChangePassword")
                     navigate("/changePassword")
                 }}
-                titleMenu="Change Password" icon={{ Icon: ChainIcon, css: "stroke" }} />
+                titleMenu="Change Password" icon={{ Icon: ChainIcon, css: "stroke" }} 
+                isSelected={isSelected==="ChangePassword"}/>
             <Divider />
             <MenuItem
-                onClick={() => {
-                    setSettingMenuItemSelected("Logout")
-                }}
-                titleMenu="Logout" icon={{ Icon: LogoutIcon, css: "stroke" }} />
+                onClick={logout}
+                titleMenu="Logout" icon={{ Icon: LogoutIcon, css: "stroke" }} isSelected={false}/>
         </div>
     )
 }
@@ -54,24 +63,20 @@ type MenuItemProps = {
         css: "fill" | "stroke"
     },
     titleMenu: string,
-    iconLeft?: {
-        Icon: React.ComponentType<{ className?: string }>,
-        css: "fill" | "stroke"
-    },
     isSelected?: boolean,
     onClick?: () => void
 }
 
-export function MenuItem({ icon, titleMenu, iconLeft, isSelected, onClick }: MenuItemProps) {
+export function MenuItem({ icon, titleMenu, isSelected, onClick }: MenuItemProps) {
     return (
         <div
             onClick={onClick}
-            className={`flex flex-row items-center justify-between gap-x-2 p-2 rounded-6 ${isSelected ? "bg-neutral-100" : "bg-neutral-0"}`}>
+            className={`flex flex-row items-center justify-between gap-x-2 p-2 rounded-6 cursor-pointer ${isSelected ? "bg-neutral-100" : "bg-neutral-0"} hover:bg-neutral-100`}>
             <div className="flex flex-row items-center gap-x-2">
                 <icon.Icon className={`size-5 ${icon.css}-neutral-950`} />
                 <span className="sans-serif-text-preset-4 text-neutral-950 text-left">{titleMenu}</span>
             </div>
-            {iconLeft && <iconLeft.Icon className={`size-5 ${iconLeft.css}-neutral-950`} />}
+            {isSelected && <ChevronRightIcon className={`size-5 fill-neutral-950`} />}
         </div>
     )
 }

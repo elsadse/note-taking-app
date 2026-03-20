@@ -4,6 +4,7 @@ import { PlusIcon } from "../icons/PlusIcon"
 import { useGlobalStore, type GlobalStore } from "../../hooks/useGlobalStore"
 import { useNavigate } from "react-router"
 import { useState } from "react"
+import { Divider } from "../Divider"
 
 export function SideBarAllNotes() {
 
@@ -61,9 +62,9 @@ export function SideBarAllNotes() {
                     </div>
                 )}
                 {notes.map((note, noteIndex) => (
-                    <div className="flex flex-col">
+                    <div key={noteIndex} className="flex flex-col">
                         <NoteItem key={noteIndex} title={note.title} tags={note.tags} date={note.date} isSelected={note.selected} />
-                        {noteIndex < notes.length - 1 && <div className="h-0.25 bg-neutral-200 shrink-0" />}
+                        {noteIndex < notes.length - 1 && <Divider/>}
                     </div>
                 ))}
             </div>

@@ -75,7 +75,7 @@ export function ContentAllNote() {
             {sideBarItemSelected === "Archive" || menuItemSelected === "Archive" && <span className="text-neutral-700 sans-serif-text-preset-5">All your archived notes are stored here. You can restore or delete them anytime.</span>}
             <div className="flex flex-col gap-y-4 overflow-y-auto">
                 {notes.map((note, noteIndex) => (
-                    <div className="flex flex-col">
+                    <div key={noteIndex} className="flex flex-col">
                         <Link to="/note">
                             <NoteItem key={noteIndex} title={note.title} tags={note.tags} date={note.date} isSelected={note.selected} />
                         </Link>
