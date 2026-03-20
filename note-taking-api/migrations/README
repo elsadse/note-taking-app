@@ -1,0 +1,26 @@
+Generic single-database configuration.
+
+```bash
+# setup migration
+alembic init migrations
+uv run alembic init migrations
+```
+
+```bash
+# Générer la migration automatiquement
+uv run alembic revision --autogenerate -m "create users table"
+
+# Appliquer la migration
+uv run alembic upgrade head
+```
+
+```bash
+# connexion db docker
+docker exec -it notes_db psql -U admin -d note
+
+\dt                  # lister toutes les tables
+\d users             # détail de la table users (colonnes, types, contraintes)
+\l                   # lister toutes les bases de données
+SELECT * FROM users; # voir les données
+\q                   # quitter
+```
