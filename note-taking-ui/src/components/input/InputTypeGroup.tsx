@@ -17,10 +17,12 @@ type InputTypeGroupProps = {
         url: string
     },
     isError?: boolean,
-    onIconClick?: () => void
+    onIconClick?: () => void,
+    inputValue?:string,
+    onChange?:(e: React.ChangeEvent<HTMLInputElement>)=>void
 }
 
-export function InputTypeGroup({ name, titleLabel, type, placeholder, icon, textError, link, isError = true, onIconClick }: InputTypeGroupProps) {
+export function InputTypeGroup({ name, titleLabel, type, placeholder, icon, textError, link, isError = true, onIconClick, inputValue, onChange }: InputTypeGroupProps) {
     return (
         <div className="flex flex-col gap-y-1.5">
             <div className="flex flex-row justify-between">
@@ -28,10 +30,10 @@ export function InputTypeGroup({ name, titleLabel, type, placeholder, icon, text
                 {link && <Link to={link.url} className="sans-serif-text-preset-6 text-neutral-600 text-right underline decoration-neutral-600">{link.text}</Link>}
             </div>
             {icon ?
-                <InputField type={type} name={name} placeholder={placeholder} isError={textError && isError ? true : false} icons={{ IconAfterInput: icon.Icon, css: icon.css }} onIconClick={onIconClick} />
-                : <InputField type={type} name={name} placeholder={placeholder} isError={textError ? true : false} />
+                <InputField type={type} name={name} placeholder={placeholder} isError={textError && textError.length>0 && isError ? true : false} onChange={onChange} inputValue={inputValue} icons={{ IconAfterInput: icon.Icon, css: icon.css }} onIconClick={onIconClick} />
+                : <InputField type={type} name={name} placeholder={placeholder} isError={textError && textError.length>0 ? true : false} onChange={onChange} inputValue={inputValue} />
             }
-            {textError && <InputError isError={isError} textError={textError} />}
+            {textError && textError.length>0 && <InputError isError={isError} textError={textError} />}
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router'
+import { AuthProvider } from './providers/AuthProvider.tsx'
 
 const basename = import.meta.env.BASE_URL
 
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
         ? basename.slice(0, -1)
         : basename
     }>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </BrowserRouter>
   </StrictMode >,
 )

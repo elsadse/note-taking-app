@@ -19,6 +19,7 @@ import { SettingsFontOption } from "./pages/home/settings/SettingsFontOption"
 import { SettingsChangePassword } from "./pages/home/settings/SettingsChangePassword"
 import { CreateNote } from "./pages/CreateNote"
 import { ContentCreateNote } from "./pages/home/ContentCreateNote"
+import { ProtectedRoute } from "./components/ProtectedRoute"
 
 function App() {
 
@@ -32,17 +33,18 @@ function App() {
         <Route path="resetPassword" element={<ResetPasswordPage />} />
         <Route path="register" element={<RegisterPage />} />
       </Route>
-
-      <Route element={<HomeLayout />}>
-        <Route path="" element={bp === "xl" ? <ContentHomeDesktop /> : <ContentAllNote />} />
-        <Route path="note" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentNote />} />
-        <Route path="tags" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentAllTags />} />
-        <Route path="search" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentSearch />} />
-        <Route path="settings" element={bp === "xl" ? <ContentSettingsDesktop /> : <ContentSettings />} />
-        <Route path="colorTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsColorTheme />} />
-        <Route path="fontTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsFontOption />} />
-        <Route path="changePassword" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsChangePassword />} />
-        <Route path="createNote" element={bp === "xl" ? <ContentCreateNote /> : <CreateNote />} />
+      <Route element={<ProtectedRoute />}>
+        <Route element={<HomeLayout />}>
+          <Route path="" element={bp === "xl" ? <ContentHomeDesktop /> : <ContentAllNote />} />
+          <Route path="note" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentNote />} />
+          <Route path="tags" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentAllTags />} />
+          <Route path="search" element={bp === "xl" ? <Navigate to="/" replace /> : <ContentSearch />} />
+          <Route path="settings" element={bp === "xl" ? <ContentSettingsDesktop /> : <ContentSettings />} />
+          <Route path="colorTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsColorTheme />} />
+          <Route path="fontTheme" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsFontOption />} />
+          <Route path="changePassword" element={bp === "xl" ? <ContentSettingsDesktop /> : <SettingsChangePassword />} />
+          <Route path="createNote" element={bp === "xl" ? <ContentCreateNote /> : <CreateNote />} />
+        </Route>
       </Route>
 
       <Route path="component" element={<Components />} />

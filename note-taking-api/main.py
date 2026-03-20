@@ -2,8 +2,19 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from app.routes import auth_route
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Notes API")
+
+origins=["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # handler valueError exception 
 @app.exception_handler(RequestValidationError)
