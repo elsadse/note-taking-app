@@ -7,7 +7,10 @@ from alembic import context
 
 # Import de ta Base et de la config
 from app.database import Base
-from app.models.user import User  
+from app.models.note_tag import note_tag
+from app.models.user import User
+from app.models.note import Note
+from app.models.tag import Tag
 import os
 from dotenv import load_dotenv
 

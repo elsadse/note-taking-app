@@ -2,7 +2,6 @@ Generic single-database configuration.
 
 ```bash
 # setup migration
-alembic init migrations
 uv run alembic init migrations
 ```
 

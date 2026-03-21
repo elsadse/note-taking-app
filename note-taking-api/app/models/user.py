@@ -1,6 +1,6 @@
 from sqlalchemy import Column, DateTime, String, func, BigInteger
-from sqlalchemy.dialects.postgresql import UUID
 from app.database import Base
+from sqlalchemy.orm import relationship
 
 class User(Base):
     __tablename__ = "users"
@@ -14,3 +14,5 @@ class User(Base):
         server_default=func.now(), 
         onupdate=func.now()
     )
+
+    notes = relationship("Note", back_populates="user", cascade="all, delete-orphan")
