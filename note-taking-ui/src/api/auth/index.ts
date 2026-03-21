@@ -26,7 +26,8 @@ export async function authLogout(): Promise<void> {
     if (!apiUrl) throw new Error("VITE_NOTE_TAKING_API_URL environment variable is not set")
 
     const response = await fetch(`${apiUrl}/auth/logout`, {
-        method: "POST"
+        method: "POST",
+        credentials: "include"
     })
     await parseKnownErrors({ expectedStatusCode: 204, response })
 }
@@ -41,6 +42,23 @@ export async function authRegister({ email, password }: { email: string, passwor
         credentials: "include"
     })
     await parseKnownErrors({ expectedStatusCode: 201, response })
+
+    const parsedResponse = AuthApiResponseSchema.safeParse(await response.json())
+    if (!parsedResponse.success) {
+        throw parsedResponse.error
+    }
+
+    return parsedResponse.data
+}
+
+export async function authMe(): Promise<AuthApiResponse> {
+    if (!apiUrl) throw new Error("VITE_NOTE_TAKING_API_URL environment variable is not set")
+
+    const response = await fetch(`${apiUrl}/auth/me`, {
+        method: "GET",
+        credentials: "include"
+    })
+    await parseKnownErrors({ expectedStatusCode: 200, response })
 
     const parsedResponse = AuthApiResponseSchema.safeParse(await response.json())
     if (!parsedResponse.success) {

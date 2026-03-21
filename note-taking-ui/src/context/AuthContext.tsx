@@ -11,7 +11,8 @@ export type AuthContextType = {
         login: Nullable<ErrorApiResponse>
         register: Nullable<ErrorApiResponse>
     }
-    isLoading: boolean
+    isLoading: boolean,
+    isInitialized:boolean
 }
 
 export const AuthContext = createContext<Nullable<AuthContextType>>(null)

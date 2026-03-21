@@ -3,7 +3,11 @@ import { Navigate, Outlet } from "react-router"
 import { useAuthContext } from "../hooks/useAuthContext"
 
 export function ProtectedRoute(): JSX.Element {
-    const { authenticatedUser } = useAuthContext()
+    const { authenticatedUser, isInitialized } = useAuthContext()
+
+    if (!isInitialized) {
+        return <div>wait...</div>  
+    }
     
     if (authenticatedUser === null) {
         return <Navigate to="login" replace/>

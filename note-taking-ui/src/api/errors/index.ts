@@ -29,7 +29,7 @@ export async function parseKnownErrors({ expectedStatusCode, response }: {
             }
         } else {
             const parsedResponse = UnauthorizedApiResponseSchema.safeParse(await response.json())
-            console.log(parsedResponse)
+            //console.log(parsedResponse)
             if (!parsedResponse.success) {
                 throw parsedResponse.error
             }

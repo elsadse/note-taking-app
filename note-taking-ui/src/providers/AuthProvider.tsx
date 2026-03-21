@@ -1,7 +1,7 @@
-import { useState, type ReactNode } from "react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 import { ApiError } from "../api/errors/ApiError"
 import type { AuthApiResponse } from "../api/auth/schema"
-import { authLogin, authLogout, authRegister } from "../api/auth"
+import { authLogin, authLogout, authMe, authRegister } from "../api/auth"
 import { useNavigate } from "react-router"
 import { AuthContext } from "../context/AuthContext"
 import type { ErrorApiResponse } from "../api/errors/schema"
@@ -14,8 +14,39 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     }>({ login: null, register: null })
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [authenticatedUser, setAuthenticatedUser] = useState<Nullable<string>>(null)
-
+    const [isInitialized, setIsInitialized] = useState<boolean>(false)
     const navigate = useNavigate()
+    const sessionTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+    function clearSessionTimer(): void {
+        if (sessionTimer.current) {
+            clearTimeout(sessionTimer.current)
+            sessionTimer.current = null
+        }
+    }
+
+    function startSessionTimer(): void {
+        clearSessionTimer()
+        sessionTimer.current = setTimeout(() => {
+            logout()
+        }, 30 * 60 * 1000)
+    }
+
+    useEffect(() => {
+        authMe()
+            .then((response: AuthApiResponse) => {
+                console.log("authMe success:", response)
+                setAuthenticatedUser(response.email)
+                startSessionTimer()
+            })
+            .catch((e) => {
+                console.log("authMe failed:", e)
+                setAuthenticatedUser(null)
+            })
+            .finally(() => {
+                setIsInitialized(true)
+            })
+    }, [])
 
     function login(email: string, password: string): void {
         setIsLoading(true)
@@ -23,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
             .then((response: AuthApiResponse) => {
                 setAuthenticatedUser(response.email)
                 setError({ ...error, login: null })
+                startSessionTimer()
                 navigate("/", { replace: true })
             })
             .catch((e) => {
@@ -35,6 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     }
 
     function logout(): void {
+        clearSessionTimer()
         setIsLoading(true)
         authLogout()
             .catch((): void => {
@@ -50,7 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
 
     function register(email: string, password: string): void {
         setIsLoading(true)
-        authRegister({email, password })
+        authRegister({ email, password })
             .then((response: AuthApiResponse): void => {
                 login(response.email, password)
             })
@@ -64,7 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
     }
 
     return (
-        <AuthContext.Provider value={{ authenticatedUser, login, logout, register, error, isLoading }}>
+        <AuthContext.Provider value={{ authenticatedUser, login, logout, register, error, isLoading, isInitialized }}>
             {children}
         </AuthContext.Provider>
     )

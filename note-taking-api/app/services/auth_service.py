@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 from app.repositories.user_repository import UserRepository
 from app.schemas.user_schema import UserCreate, UserLogin, UserResponse, UserLoginResponse
-from app.utils.user_utils import verify_password, create_access_token
+from app.utils.user_utils import verify_password, create_access_token, decode_access_token
 from app.exception import ConflictException, UnauthorizedException, NotFoundException
 
 class AuthService:
@@ -23,3 +23,13 @@ class AuthService:
             raise UnauthorizedException(detail="Email or Password Invalid")
         jwt_token=create_access_token(user_id=str(user.id))
         return UserLoginResponse(id=user.id, email=user.email, jwt_token=jwt_token)
+    
+    async def get_current_user(self, token: str)->UserResponse:
+        user_id = decode_access_token(token)
+        user= await self.repo.get_by_id(int(user_id))
+        if not user:
+            raise UnauthorizedException(detail="User not found")
+        return UserResponse(id=user.id, email=user.email)
+
+    
+

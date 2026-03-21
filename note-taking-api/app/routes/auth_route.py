@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, Cookie
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.schemas.user_schema import UserCreate, UserLogin, UserResponse
 from app.services.auth_service import AuthService
 from app.utils.config import settings
+from typing import Optional
+from app.exception import UnauthorizedException
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -21,7 +23,8 @@ async def login(data: UserLogin, response: Response, db: Session = Depends(get_d
         value=user_with_token.jwt_token,
         httponly=True,
         secure=not is_dev,
-        samesite="strict" if is_dev else "none",
+        samesite="lax" if is_dev else "none",
+        path="/",
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     )
     return UserResponse(id=user_with_token.id, email=user_with_token.email)
@@ -33,6 +36,13 @@ async def logout(response: Response):
         key="token",
         httponly=True,
         secure=not is_dev,
-        samesite="strict" if is_dev else "none",
+        samesite="lax" if is_dev else "none",
         path="/",
     )
+
+@router.get("/me", response_model=UserResponse)
+async def me(token: Optional[str] = Cookie(default=None, alias="token"), db: Session = Depends(get_db)):
+    print("Cookie token reçu:", token)
+    if token is None:
+        raise UnauthorizedException(detail="Not authenticated")
+    return await AuthService(db).get_current_user(token)
