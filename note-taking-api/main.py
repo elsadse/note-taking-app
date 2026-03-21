@@ -1,12 +1,15 @@
+import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from app.routes import auth_route
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.utils.config import settings
+
 app = FastAPI(title="Notes API")
 
-origins=["http://localhost:5173", "http://127.0.0.1:5173",]
+origins=["http://localhost:5173",]
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,3 +39,6 @@ app.include_router(auth_route.router)
 @app.get("/health")
 def health():
     return {"status": "ok"}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="localhost", port=8080, reload=True)

@@ -23,8 +23,7 @@ async def login(data: UserLogin, response: Response, db: Session = Depends(get_d
         value=user_with_token.jwt_token,
         httponly=True,
         secure=not is_dev,
-        samesite="lax" if is_dev else "none",
-        path="/",
+        samesite="strict" if is_dev else "none",
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
     )
     return UserResponse(id=user_with_token.id, email=user_with_token.email)
@@ -36,7 +35,7 @@ async def logout(response: Response):
         key="token",
         httponly=True,
         secure=not is_dev,
-        samesite="lax" if is_dev else "none",
+        samesite="strict" if is_dev else "none",
         path="/",
     )
 

@@ -37,7 +37,6 @@ export function AuthProvider({ children }: { children: ReactNode }): ReactNode {
             .then((response: AuthApiResponse) => {
                 console.log("authMe success:", response)
                 setAuthenticatedUser(response.email)
-                startSessionTimer()
             })
             .catch((e) => {
                 console.log("authMe failed:", e)
