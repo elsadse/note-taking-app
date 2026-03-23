@@ -1,9 +1,11 @@
 from datetime import datetime, timedelta, timezone
 import jwt
 from pwdlib import PasswordHash
-
 from app.utils.config import settings
 from app.exception import UnauthorizedException
+from fastapi import Cookie
+from typing import Optional
+from app.schemas.user_schema import UserResponse
 
 password_hash = PasswordHash.recommended()
 
@@ -16,7 +18,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 
 
 # JWT
-def create_access_token(user_id: str) -> str:
+async def create_access_token(user_id: str) -> str:
     expire = datetime.now(timezone.utc) + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     payload = {
         "sub": user_id,
@@ -24,7 +26,7 @@ def create_access_token(user_id: str) -> str:
     }
     return jwt.encode(payload, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
 
-def decode_access_token(token: str) -> str:
+async def decode_access_token(token: str) -> str:
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         user_id: str = payload.get("sub")
@@ -35,4 +37,11 @@ def decode_access_token(token: str) -> str:
         raise UnauthorizedException(detail="Token has expired")
     except jwt.InvalidTokenError:
         raise UnauthorizedException(detail="Invalid token")
+    
+async def get_current_user(self, token: Optional[str] = Cookie(default=None, alias="token"))->UserResponse:
+        user_id = decode_access_token(token)
+        user= await self.repo.get_by_id(int(user_id))
+        if not user:
+            raise UnauthorizedException(detail="User not found")
+        return UserResponse(id=user.id, email=user.email)
 

@@ -3,6 +3,8 @@ from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
 from app.routes import auth_route
+from app.routes import note_route
+from app.routes import tag_route
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.utils.config import settings
@@ -35,6 +37,8 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     )
 
 app.include_router(auth_route.router)
+app.include_router(note_route.router)
+app.include_router(tag_route.router)
 
 @app.get("/health")
 def health():

@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models.note import Note
 from app.models.tag import Tag
+from app.schemas.user_schema import UserResponse
 from app.repositories.note_repository import NoteRepository
 from app.repositories.tag_repository import TagRepository
 from app.schemas.note_schema import NoteCreateOrUpdate
@@ -11,8 +12,8 @@ class NoteService:
         self.note_repo = NoteRepository(db)
         self.tag_repo = TagRepository(db)
 
-    def get_all(self, current_user_id: int) -> list[Note]:
-        return self.note_repo.get_all_by_user_id(current_user_id)
+    def get_all(self, current_user: UserResponse) -> list[Note]:
+        return self.note_repo.get_all_by_user_id(current_user.id)
 
     def get_by_id(self, note_id: int) -> Note:
         note = self.note_repo.get_by_id(note_id)
@@ -24,8 +25,6 @@ class NoteService:
         note = self.note_repo.get_by_id(note_id)
         if note is None:
             raise NotFoundException("Note not found")
-        if not note.is_archived:
-            raise ForbiddenException("Cannot delete a non-archived note")
         self.note_repo.delete(note_id)
 
     def toggle_archive(self, note_id: int) -> None:
@@ -33,12 +32,12 @@ class NoteService:
             raise NotFoundException("Note not found")
         self.note_repo.toggle_archive(note_id)
 
-    def create(self, command: NoteCreateOrUpdate, current_user_id: int) -> Note:
-        if self.note_repo.exists_by_user_id_and_title(current_user_id, command.title):
+    def create(self, command: NoteCreateOrUpdate, current_user: UserResponse) -> Note:
+        if self.note_repo.exists_by_user_id_and_title(current_user.id, command.title):
             raise ConflictException("Note with this title already exists")
 
         note = Note(
-            user_id=current_user_id,
+            user_id=current_user.id,
             title=command.title,
             content=command.content,
             tags=[]
@@ -54,12 +53,12 @@ class NoteService:
 
         return self.note_repo.create(note)
 
-    def update(self, note_id: int, command: NoteCreateOrUpdate, current_user_id: int) -> None:
+    def update(self, note_id: int, command: NoteCreateOrUpdate, current_user: UserResponse) -> None:
         note = self.note_repo.get_by_id_for_update(note_id)
         if note is None:
             raise NotFoundException("Note not found")
 
-        if note.title != command.title and self.note_repo.exists_by_user_id_and_title(current_user_id, command.title):
+        if note.title != command.title and self.note_repo.exists_by_user_id_and_title(current_user.id, command.title):
             raise ConflictException("Note with this title already exists")
 
         note.title = command.title

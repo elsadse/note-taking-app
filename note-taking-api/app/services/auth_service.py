@@ -1,9 +1,10 @@
-from fastapi import HTTPException, status
+from fastapi import Cookie
 from sqlalchemy.orm import Session
 from app.repositories.user_repository import UserRepository
 from app.schemas.user_schema import UserCreate, UserLogin, UserResponse, UserLoginResponse
 from app.utils.user_utils import verify_password, create_access_token, decode_access_token
 from app.exception import ConflictException, UnauthorizedException, NotFoundException
+from typing import Optional
 
 class AuthService:
     def __init__(self, db: Session):
@@ -24,7 +25,7 @@ class AuthService:
         jwt_token=create_access_token(user_id=str(user.id))
         return UserLoginResponse(id=user.id, email=user.email, jwt_token=jwt_token)
     
-    async def get_current_user(self, token: str)->UserResponse:
+    async def get_current_user(self, token: Optional[str] = Cookie(default=None, alias="token"))->UserResponse:
         user_id = decode_access_token(token)
         user= await self.repo.get_by_id(int(user_id))
         if not user:
